@@ -4,6 +4,7 @@
 
 from flask import Flask, render_template, request, flash, redirect
 import html
+import datetime
 
 from app.helpers.session import init_session
 from app.helpers.db import connect_db
@@ -30,8 +31,7 @@ def index():
         sql = "SELECT * FROM tasks ORDER BY priority DESC"
         result = client.execute(sql)
         tasks = result.rows
-
-
+        
         # And show them on the page
         return render_template("pages/home.jinja", tasks=tasks)
 
@@ -62,7 +62,7 @@ def add_a_task():
 #-----------------------------------------------------------
 # Route for deleting a task, Id given in the route
 #-----------------------------------------------------------
-@app.get("/delete/<int:id>")
+@app.post("/delete/<int:id>")
 def delete_a_task(id):
     with connect_db() as client:
         # Delete the task from the DB
@@ -79,7 +79,7 @@ def delete_a_task(id):
 # Route for changing task completion, Id given in the route
 #-----------------------------------------------------------
 
-@app.get("/toggle/<int:id>")
+@app.post("/toggle/<int:id>")
 def change_task_completion(id):
     with connect_db() as client:
         # Change the task from the DB

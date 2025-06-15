@@ -40,6 +40,7 @@
                 <th scope="col">Priority</th>
                 <th scope="col">Timestamp</th>
                 <th scope="col">Completed</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -47,16 +48,34 @@
                     <tr>
                         <th scope="row">{{ task.name }}</th>
                         <td>{{task.priority}}</td>
-                        <td>{{task.timestamp}}</td>
+                        <td>Make Time Work Better</td>
                         {% if task.complete == 1 %}
-                            <td>Yes</td>
-                            <td><a type="button" href="/toggle/{{task.id}}" id="completion" class="task_controls">Uncomplete</a></td>
+                            <td>
+                                <form action="/toggle/{{task.id}}" method="POST">
+                                    <label>
+                                        <input type="checkbox" role="switch"  name="done" checked onchange="this.form.submit()">
+                                        Complete
+                                    </label>
+                                </form>
+                            </td>
                         {% else %}
-                            <td>No</td>
-                            <td><a type="button" href="/toggle/{{task.id}}" id="completion" class="task_controls">Complete</a></td>
+                            <td>
+                                <form action="/toggle/{{task.id}}" method="POST">
+                                    <label>
+                                        <input type="checkbox" role="switch" name="done" onchange="this.form.submit()">
+                                        Incomplete
+                                    </label>
+                                </form>
+                            </td>
                         {% endif %}
                         
-                        <td><a type="button" href="/delete/{{task.id}}" id="delete" class="task_controls"  onclick="this.getAttribute('aria-busy') === 'true';> Remove</a></td>
+                        <td>
+                            <form action="/delete/{{task.id}}" method="POST">
+                                <button type="submit" class="task_controls" onclick="this.setAttribute('aria-busy', 'true');">
+                                  Remove
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                 {% else %}
 
