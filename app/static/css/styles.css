@@ -33,3 +33,7 @@
 #messages .message.success { color: var(--pico-ins-color); }
 #messages .message.error   { color: var(--pico-del-color); }
 
+a.task_controls{
+    font-size: 15px;
+    padding: 4px;
+}

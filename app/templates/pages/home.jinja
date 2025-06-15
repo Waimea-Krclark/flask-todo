@@ -32,7 +32,64 @@
         <li>Flash messages for information</li>
     </ul>
 
-    <a href="/things" role="button">Go to the Things...</a>
+    <article>
+        <table>
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Priority</th>
+                <th scope="col">Timestamp</th>
+                <th scope="col">Completed</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                    <tr>
+                        <th scope="row">{{ task.name }}</th>
+                        <td>{{task.priority}}</td>
+                        <td>{{task.timestamp}}</td>
+                        {% if task.complete == 1 %}
+                            <td>Yes</td>
+                            <td><a type="button" href="/toggle/{{task.id}}" id="completion" class="task_controls">Uncomplete</a></td>
+                        {% else %}
+                            <td>No</td>
+                            <td><a type="button" href="/toggle/{{task.id}}" id="completion" class="task_controls">Complete</a></td>
+                        {% endif %}
+                        
+                        <td><a type="button" href="/delete/{{task.id}}" id="delete" class="task_controls"  onclick="this.getAttribute('aria-busy') === 'true';> Remove</a></td>
+                    </tr>
+                {% else %}
 
+                    <p>None!</p>
+
+                {% endfor %}
+            </tbody>
+            
+        </table>
+
+    </article>
+    <div></div>
+    <article>
+        <form action="/add" method="POST">
+            <fieldset role="group">
+                <label>
+                    <input name="name" type="text" placeholder="Enter Task Name" required>
+                </label>        
+                <label>
+                    <select name="priority" aria-label="Select task priority" required>
+                        <option selected disabled value="">
+                          Select task priority
+                        </option>
+                        <option>5</option>
+                        <option>4</option>
+                        <option>3</option>
+                        <option>2</option>
+                        <option>1</option>
+                    </select>
+                </label> 
+                <button>Submit</button>   
+            </fieldset>
+        </form>
+    </article>
 {% endblock %}
 
