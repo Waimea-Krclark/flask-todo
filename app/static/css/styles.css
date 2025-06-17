@@ -33,8 +33,31 @@
 #messages .message.success { color: var(--pico-ins-color); }
 #messages .message.error   { color: var(--pico-del-color); }
 
+
+/* OTHER ----------------------------------------------- */
 .task_controls{
     font-size: 15px;
     padding: 4px;
     min-width: 6rem;
+    align-items: center;
+}
+
+#priority1{
+    color: red;
+}
+
+#priority2{
+    color: orangered;
+}
+
+#priority3{
+    color: orange;
+}
+
+#priority4{
+    color: greenyellow;
+}
+
+#priority5{
+    color: green;
 }

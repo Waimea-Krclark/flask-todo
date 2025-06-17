@@ -47,8 +47,8 @@
                 {% for task in tasks %}
                     <tr>
                         <th scope="row">{{ task.name }}</th>
-                        <td>{{task.priority}}</td>
-                        <td>Make Time Work Better</td>
+                        <td id=priority{{task.priority}}><strong>{{ task.priority }}</strong></td>
+                        <td>{{ task.timestamp | localtimestamp }}</td>
                         {% if task.complete == 1 %}
                             <td>
                                 <form action="/toggle/{{task.id}}" method="POST">
@@ -70,7 +70,7 @@
                         {% endif %}
                         
                         <td>
-                            <form action="/delete/{{task.id}}" method="POST">
+                            <form action="/delete/{{task.id}}" method="POST" >
                                 <button type="submit" class="task_controls" onclick="this.setAttribute('aria-busy', 'true');">
                                   Remove
                                 </button>

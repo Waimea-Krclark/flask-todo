@@ -9,10 +9,14 @@ import datetime
 from app.helpers.session import init_session
 from app.helpers.db import connect_db
 from app.helpers.errors import register_error_handlers, not_found_error
+from app.helpers.time    import init_datetime, utc_timestamp, utc_timestamp_now
 
 
 # Create the app
 app = Flask(__name__)
+
+# Configure app
+init_datetime(app)  # Handle UTC dates in timestamps
 
 # Setup a session for messages, etc.
 init_session(app)

@@ -10,3 +10,6 @@ libsql-client
 
 # Environment Variables
 python-dotenv
+
+# Timezones
+tzdata
